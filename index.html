@@ -13,17 +13,17 @@
       color: #333;
     }
     header {
-  background-color: #0c1e3c;
-  background-image: url('./images/logo-myths-solutions.png');
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: contain; /* جرب cover كمان */
-  color: white;
-  padding: 100px 20px;
-  text-align: center;
-}
-}
-
+      background-color: #0c1e3c;
+      background-image: url('./images/logo-myths-solutions.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 180px;
+      background-blend-mode: overlay;
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+      position: relative;
+    }
     header h1 {
       margin: 0;
       font-size: 32px;
@@ -84,18 +84,42 @@
     .btn:hover {
       background: #0c1e3c;
     }
+
+    /* Media query section - تم إضافته في المكان الصحيح */
+    @media (max-width: 600px) {
+      header {
+        padding: 60px 10px;
+        background-size: 120px;
+      }
+
+      nav a {
+        padding: 10px;
+        font-size: 14px;
+      }
+
+      .section {
+        padding: 20px 10px;
+      }
+    }
   </style>
 </head>
 <body>
   <header>
     <h1>Myths Solutions</h1>
-    <p>Engineering & Tech Services</p>
+    <p id="subtitle">Engineering & Tech Services</p>
   </header>
+
+  <!-- Language buttons -->
+  <div style="text-align: center; margin: 10px;">
+    <button onclick="changeLanguage('en')">English</button>
+    <button onclick="changeLanguage('ar')">العربية</button>
+  </div>
+
   <nav>
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#portfolio">Portfolio</a>
-    <a href="#contact">Contact</a>
+    <a href="#about" id="nav-about">About</a>
+    <a href="#services" id="nav-services">Services</a>
+    <a href="#portfolio" id="nav-portfolio">Portfolio</a>
+    <a href="#contact" id="nav-contact">Contact</a>
   </nav>
 
   <section id="about" class="section">
@@ -105,7 +129,7 @@
 
   <section id="services" class="section">
     <h2>Our Services</h2>
-    <div class="services-grid">
+    <div class="services-grid" id="services-grid">
       <div class="card">
         <h3>PCB Design</h3>
         <p>Professional PCB layout and design services for prototyping and production.</p>
@@ -133,11 +157,38 @@
   <section id="contact" class="section">
     <h2>Contact & Join Us</h2>
     <p>If you want to be part of our journey, fill out the registration form below.</p>
-    <a href="https://forms.gle/PdmeDVCFKpzn68As7" target="_blank" class="btn">Register Now</a>
+    <a href="https://forms.gle/PdmeDVCFKpzn68As7" target="_blank" class="btn" id="register-btn">Register Now</a>
   </section>
 
   <footer>
     <p>&copy; 2025 Myths Solutions. All rights reserved.</p>
   </footer>
+
+  <script>
+    function changeLanguage(lang) {
+      if (lang === 'ar') {
+        document.body.dir = "rtl";
+        document.getElementById("nav-about").textContent = "من نحن";
+        document.getElementById("nav-services").textContent = "الخدمات";
+        document.getElementById("nav-portfolio").textContent = "أعمالنا";
+        document.getElementById("nav-contact").textContent = "تواصل معنا";
+        document.getElementById("about").innerHTML = "<h2>من نحن</h2><p>مايثز سولوشنز هي مبادرة شبابية تقدم حلولًا هندسية وتقنية واقعية وتدعم الطلاب والعملاء من خلال الابتكار والعمل الجماعي والأثر الحقيقي.</p>";
+        document.getElementById("services").innerHTML = `
+          <h2>خدماتنا</h2>
+          <div class="services-grid">
+            <div class="card"><h3>تصميم الدوائر المطبوعة</h3><p>تصميم احترافي للدوائر المطبوعة لأغراض النماذج الأولية والإنتاج.</p></div>
+            <div class="card"><h3>نمذجة باستخدام سوليدووركس</h3><p>تصميم ميكانيكي ثلاثي الأبعاد باستخدام برنامج SolidWorks.</p></div>
+            <div class="card"><h3>مشاريع إنترنت الأشياء وأردوينو</h3><p>تطبيق حلول ذكية باستخدام المستشعرات وأردوينو وتقنيات IoT.</p></div>
+            <div class="card"><h3>تنظيم الفعاليات التقنية</h3><p>تنظيم وإدارة فعاليات وورش عمل تقنية موجهة للطلاب.</p></div>
+          </div>`;
+        document.getElementById("portfolio").innerHTML = "<h2>أعمالنا</h2><p>قريبًا: عرض لأبرز مشاريعنا وحلولنا الهندسية السابقة.</p>";
+        document.getElementById("contact").innerHTML = `<h2>تواصل معنا وانضم إلينا</h2><p>إذا كنت ترغب في أن تكون جزءًا من رحلتنا، املأ نموذج التسجيل أدناه.</p><a href="https://forms.gle/PdmeDVCFKpzn68As7" target="_blank" class="btn" id="register-btn">سجل الآن</a>`;
+        document.getElementById("subtitle").textContent = "خدمات هندسية وتقنية";
+      } else {
+        document.body.dir = "ltr";
+        location.reload(); // أبسط طريقة لإعادة تعيين كل النصوص للإنجليزية من المصدر
+      }
+    }
+  </script>
 </body>
 </html>
